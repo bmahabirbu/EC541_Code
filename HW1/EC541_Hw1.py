@@ -99,13 +99,12 @@ def Problem_5():
     sampled = []
     right = 0
     count = 0
-    for j in range(0,10**6):
-        sampled.append(rng.integers(1,64, size=10))
-        if len(np.unique(sampled)) == 10:
+    sample_size = 10**6
+    sampled.append(rng.integers(1,64, size=(sample_size,10)))
+    for i in range(0,sample_size):
+        if len(np.unique(sampled[0][i])) == 10:
             right += 1
-        count += 1
-        sampled = []
-    print(right/count)
+    print(right/sample_size)
     #Output = 0.476568 (pretty close)
     # new output = 0.470494
 

@@ -105,5 +105,15 @@ def Problem_5():
     print(right/sample_size)
     #Output = 0.476568 (pretty close)
     # new output = 0.470494
+def Problem_5_hand():
+    prob = 1
+    for i in range(0,10):
+        prob = prob * (64 - i)/64
+    print(prob)
 
-Problem_5()
+    prob = 1
+    for i in range(0,9):
+        prob = prob * (64 - i)/64
+    print(prob * 9/64)
+
+Problem_5_hand()

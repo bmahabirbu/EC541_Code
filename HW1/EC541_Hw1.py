@@ -95,10 +95,8 @@ def Problem_4():
     plt.show()
 
 def Problem_5():
-    a = []
     sampled = []
     right = 0
-    count = 0
     sample_size = 10**6
     sampled.append(rng.integers(1,64, size=(sample_size,10)))
     for i in range(0,sample_size):

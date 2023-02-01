@@ -100,20 +100,59 @@ def Problem_5():
     sample_size = 10**6
     sampled.append(rng.integers(1,64, size=(sample_size,10)))
     for i in range(0,sample_size):
-        if len(np.unique(sampled[0][i])) == 10:
+        if len(np.unique(sampled[0][i])) == 9:
             right += 1
     print(right/sample_size)
-    #Output = 0.476568 (pretty close)
-    # new output = 0.470494
-def Problem_5_hand():
-    prob = 1
-    for i in range(0,10):
-        prob = prob * (64 - i)/64
-    print(prob)
+    #Output = 0.392119 (pretty close)
 
-    prob = 1
-    for i in range(0,9):
-        prob = prob * (64 - i)/64
-    print(prob * 9/64)
+def Problem_6():
+    #6a
+    # holding_time_a rng.uniform(0,1,[sample_size,1])
+    pb = 0
+    sample_size = 10**6
 
-Problem_5_hand()
+    arrival_times_a = rng.uniform(0,2,[sample_size,1])
+    holding_time_a = np.ones([sample_size,1])
+
+    arrival_times_b = rng.uniform(0,2,[sample_size,1])
+    holding_time_b = np.ones([sample_size,1])
+
+    a = np.concatenate((arrival_times_a, holding_time_a), axis=1)
+    b = np.concatenate((arrival_times_b, holding_time_b), axis=1)
+
+    for i in range(0,sample_size):
+        if a[i][0] < b[i][0] and b[i][0] < a[i][0]+a[i][1]:
+           # "call a reached first and call b starts before call a finishes"
+            pb += 1
+        elif b[i][0] < a[i][0] and a[i][0] < b[i][0]+b[i][1]:
+            # "call b reached and call a starts before call b finishes"
+            pb += 1
+    print(pb/(sample_size))
+
+    #6b
+    # holding_time_a = rng.uniform(0,1,[sample_size,1])
+    pb = 0
+    sample_size = 10**6
+
+    arrival_times_a = rng.uniform(0,2,[sample_size,1])
+    holding_time_a = rng.uniform(0,1,[sample_size,1])
+
+    arrival_times_b = rng.uniform(0,2,[sample_size,1])
+    holding_time_b = rng.uniform(0,1,[sample_size,1])
+
+    a = np.concatenate((arrival_times_a, holding_time_a), axis=1)
+    b = np.concatenate((arrival_times_b, holding_time_b), axis=1)
+
+    for i in range(0,sample_size):
+        if a[i][0] < b[i][0] and b[i][0] < a[i][0]+a[i][1]:
+           # "call a reached first and call b starts before call a finishes"
+            pb += 1
+        elif b[i][0] < a[i][0] and a[i][0] < b[i][0]+b[i][1]:
+            # "call b reached and call a starts before call b finishes"
+            pb += 1
+    print(pb/(sample_size)) 
+    #Outputs 
+    #6a = 0.750116
+    #6b = 0.417168
+
+Problem_6()
